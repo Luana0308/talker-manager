@@ -20,8 +20,12 @@ app.get('/talker', async (_req, res) => {
 
   if (!talker.length) {
     return res.status(HTTP_OK_STATUS).send([]);
-  };
-})
+  }
+});
+
+// requisito 2
+// app.get('')
+
 
 app.listen(PORT, () => {
   console.log('Online');
