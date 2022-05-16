@@ -24,9 +24,11 @@ app.get('/talker', async (_req, res) => {
 });
 
 // requisito 2
-app.get('/talker/:id', async(req, res) => {
-  const {id} = req.params;
-  res.status(HTTP_OK_STATUS).json({id})
+app.get('/talker/:id', async (req, res) => {
+  const talker = await readFile();
+  const { id } = req.params;
+  const person = talker.filter((u) => u.id === id);
+  res.status(HTTP_OK_STATUS).json({ person });
 });
 
 app.listen(PORT, () => {
