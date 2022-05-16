@@ -13,14 +13,14 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-//requisito 1
+// requisito 1
 app.get('/talker', async (_req, res) => {
   const talker = await readFile();
   res.status(HTTP_OK_STATUS).send(talker);
 
-  if(!talker.length) {
-    return res.status(HTTP_OK_STATUS).send([])
-  }
+  if (!talker.length) {
+    return res.status(HTTP_OK_STATUS).send([]);
+  };
 })
 
 app.listen(PORT, () => {
