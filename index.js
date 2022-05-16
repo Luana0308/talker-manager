@@ -24,8 +24,10 @@ app.get('/talker', async (_req, res) => {
 });
 
 // requisito 2
-// app.get('')
-
+app.get('/talker/:id', async(req, res) => {
+  const {id} = req.params;
+  res.status(HTTP_OK_STATUS).json({id})
+});
 
 app.listen(PORT, () => {
   console.log('Online');
