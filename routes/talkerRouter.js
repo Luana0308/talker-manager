@@ -1,9 +1,16 @@
 const express = require('express');
 
-const router = express.Router();
-const { readFile, httpResponse } = require('../utils');
+const { validationAge } = require('../middlewares/validationAge');
+const { validationName } = require('../middlewares/validationName');
+const { validationTalk } = require('../middlewares/validationTalk');
+const { validationWatchedAt } = require('../middlewares/validationWatchedAt');
+const { validationRate } = require('../middlewares/validationRate');
+const { validationToken } = require('../middlewares/validationToken');
 
-const { OK_STATUS, NOT_FOUND_STATUS } = httpResponse;
+const router = express.Router();
+const { readFile, httpResponse, writeFile } = require('../utils');
+
+const { OK_STATUS, NOT_FOUND_STATUS, CREATED_STATUS } = httpResponse;
 
 // requisito 1
 router.get('/', async (_req, res) => {
@@ -22,6 +29,22 @@ router.get('/:id', async (req, res) => {
   }
 
   return res.status(OK_STATUS).send(person[0]);
+});
+
+// requisito 5
+router.post('/', 
+  validationName, 
+  validationAge, 
+  validationTalk,
+  validationWatchedAt,
+  validationRate,
+  validationToken,
+  async (req, res) => {
+  const { name, age, talk: { watchedAt, rate } } = req.body;
+  const talker = await readFile();
+  const id = talker.length;
+    await writeFile([...talker, { id: id + 1, name, age, talk: { watchedAt, rate } }]);
+  return res.status(CREATED_STATUS).json({ id: id + 1, name, age, talk: { watchedAt, rate } });
 });
 
   module.exports = router;

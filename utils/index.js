@@ -13,9 +13,11 @@ const writeFile = async (content) => {
 };
 
 const httpResponse = {
-     OK_STATUS: 200,
-     BAD_REQUEST_STATUS: 400,
-     NOT_FOUND_STATUS: 404,
+    OK_STATUS: 200,
+    BAD_REQUEST_STATUS: 400,
+    NOT_FOUND_STATUS: 404,
+    UNAUTHORIZED_STATUS: 401,
+    CREATED_STATUS: 201,
 };
 
 module.exports = {
