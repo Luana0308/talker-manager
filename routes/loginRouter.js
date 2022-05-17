@@ -1,8 +1,9 @@
 const express = require('express');
+
 const router = express.Router();
-const { validationEmail } = require('../middlewares/validationEmail');
-const { validationPassword } = require('../middlewares/validationPassword')
 const crypto = require('crypto');
+const { validationEmail } = require('../middlewares/validationEmail');
+const { validationPassword } = require('../middlewares/validationPassword');
 const { httpResponse } = require('../utils');
 
 const { OK_STATUS } = httpResponse;

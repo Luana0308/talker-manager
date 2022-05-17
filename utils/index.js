@@ -15,11 +15,11 @@ const writeFile = async (content) => {
 const httpResponse = {
      OK_STATUS: 200,
      BAD_REQUEST_STATUS: 400,
-     NOT_FOUND_STATUS: 404
-}
+     NOT_FOUND_STATUS: 404,
+};
 
 module.exports = {
     readFile,
     writeFile,
-    httpResponse
+    httpResponse,
 };

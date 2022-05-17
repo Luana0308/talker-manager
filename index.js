@@ -1,7 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const crypto = require('crypto');
-const { validationEmail } = require('./middlewares/validationEmail');
 const talkerRouter = require('./routes/talkerRouter');
 const loginRouter = require('./routes/loginRouter');
 
