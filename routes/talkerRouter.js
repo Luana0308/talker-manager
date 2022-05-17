@@ -47,4 +47,24 @@ router.post('/',
   return res.status(CREATED_STATUS).json({ id: id + 1, name, age, talk: { watchedAt, rate } });
 });
 
+// requisito 6
+router.put('/:id', 
+  validationToken,
+  validationName,
+  validationAge,
+  validationTalk,
+  validationWatchedAt,
+  validationRate,
+async (req, res) => {
+  const { id } = req.params;
+  const { name, age, talk: { watchedAt, rate } } = req.body;
+  console.log(req.body);
+  const newTalker = { id: +id, name, age, talk: { watchedAt, rate } };
+  const talker2 = await readFile();
+  const talkerId = talker2.map((talker) => (talker.id === +id ? newTalker : talker));
+  await writeFile(talkerId);
+  console.log(newTalker);
+  return res.status(OK_STATUS).json(newTalker);
+});
+
   module.exports = router;
