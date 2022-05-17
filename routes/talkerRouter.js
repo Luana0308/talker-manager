@@ -33,12 +33,12 @@ router.get('/:id', async (req, res) => {
 
 // requisito 5
 router.post('/', 
+  validationToken,
   validationName, 
   validationAge, 
   validationTalk,
   validationWatchedAt,
   validationRate,
-  validationToken,
   async (req, res) => {
   const { name, age, talk: { watchedAt, rate } } = req.body;
   const talker = await readFile();
