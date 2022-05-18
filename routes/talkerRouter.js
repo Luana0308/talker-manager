@@ -10,7 +10,7 @@ const { validationToken } = require('../middlewares/validationToken');
 const router = express.Router();
 const { readFile, httpResponse, writeFile } = require('../utils');
 
-const { OK_STATUS, NOT_FOUND_STATUS, CREATED_STATUS } = httpResponse;
+const { OK_STATUS, NOT_FOUND_STATUS, CREATED_STATUS, NO_CONTENT_STATUS } = httpResponse;
 
 // requisito 1
 router.get('/', async (_req, res) => {
@@ -58,13 +58,26 @@ router.put('/:id',
 async (req, res) => {
   const { id } = req.params;
   const { name, age, talk: { watchedAt, rate } } = req.body;
-  console.log(req.body);
   const newTalker = { id: +id, name, age, talk: { watchedAt, rate } };
   const talker2 = await readFile();
   const talkerId = talker2.map((talker) => (talker.id === +id ? newTalker : talker));
   await writeFile(talkerId);
-  console.log(newTalker);
   return res.status(OK_STATUS).json(newTalker);
+});
+
+// requisito 7
+router.delete('/:id', validationToken, async (req, res) => {
+  const talker3 = await readFile();
+  const { id } = req.params;
+  const personId = talker3.findIndex((r) => r.id === +id);
+
+  if (personId === -1) return res.status(NOT_FOUND_STATUS).json({ message: 'talker not found!' });
+
+  talker3.splice(personId, 1);
+
+  await writeFile(talker3);
+
+  res.status(NO_CONTENT_STATUS).end();
 });
 
   module.exports = router;

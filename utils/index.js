@@ -18,6 +18,7 @@ const httpResponse = {
     NOT_FOUND_STATUS: 404,
     UNAUTHORIZED_STATUS: 401,
     CREATED_STATUS: 201,
+    NO_CONTENT_STATUS: 204,
 };
 
 module.exports = {
