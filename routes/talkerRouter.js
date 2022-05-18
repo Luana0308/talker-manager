@@ -18,6 +18,16 @@ router.get('/', async (_req, res) => {
   res.status(OK_STATUS).send(talker);
 });
 
+// requisito 8
+router.get('/search', validationToken, async (req, res) => {
+  const talker4 = await readFile();
+  const { q } = req.query;
+
+  const name = talker4.filter((n) => n.name.includes(q));
+
+  res.status(OK_STATUS).json(name);
+});
+
 // requisito 2
 router.get('/:id', async (req, res) => {
   const talker = await readFile();
